@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from '@/components/HeaderPatriot'
+import Footer from '@/components/FooterPatriot'
 
 interface FAQItem {
   question: string

@@ -8,14 +8,15 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     remotePatterns: [
-      // Add domains here ONLY if you load remote images with next/image
+      // Only add domains here if you actually use next/image with remote URLs
       // { protocol: "https", hostname: "i.ytimg.com" },
+      // { protocol: "https", hostname: "i.vimeocdn.com" },
     ],
   },
 
   async redirects() {
     return [
-      // ✅ OLD HTML URLs (from Google Search Console) → NEW Next.js pages
+      // ✅ OLD HTML URLs (from Search Console) → NEW Next.js pages
       {
         source: "/contact-las-vegas-drone-shows.html",
         destination: "/contact",
@@ -58,7 +59,7 @@ const nextConfig = {
 
   async headers() {
     return [
-      // Cache static assets hard (great for Core Web Vitals)
+      // ✅ Cache static assets hard (Core Web Vitals win)
       {
         source:
           "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|mp4|webm|css|js|map|woff|woff2)",
@@ -67,17 +68,41 @@ const nextConfig = {
         ],
       },
 
-      // Reasonable security headers (safe for SEO)
+      // ✅ Keep API + chatbot out of the index at the HEADER level (belt & suspenders)
+      {
+        source: "/api/(.*)",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/chatbot",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+
+      // ✅ Global headers (safe for SEO + embeds)
       {
         source: "/(.*)",
         headers: [
+          // SEO safety net (prevents accidental “noindex”)
+          { key: "X-Robots-Tag", value: "index, follow" },
+
+          // Security / trust (safe defaults)
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+
+          // HSTS (only if you are ALWAYS https — which Vercel custom domains should be)
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains; preload",
+          },
+
+          // Optional: clickjacking protection.
+          // SAMEORIGIN does NOT block you from embedding Vimeo/YouTube inside your site.
+          // It only blocks OTHER sites from framing YOUR pages.
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
       },
     ];

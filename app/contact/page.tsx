@@ -1,145 +1,123 @@
-'use client'
+import type { Metadata } from "next";
+import ContactForm from "./ContactForm";
 
-import { useState } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+export const metadata: Metadata = {
+  title: "Contact Patriot Drone Shows | Request a Drone Show Quote",
+  description:
+    "Contact Patriot Drone Shows to request pricing, availability, and drone count recommendations for patriotic drone light shows nationwide.",
+  alternates: {
+    canonical: "https://www.patriotdroneshows.com/contact",
+  },
+};
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    try {
-      const response = await fetch('https://formspree.io/f/myzyaqbw', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (response.ok) {
-        setSubmitted(true)
-        setFormData({ name: '', email: '', message: '' })
-      }
-    } catch (error) {
-      console.error('Form submission error:', error)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
+export default function ContactPage() {
   return (
-    <>
-      <Header />
+    <main className="bg-black text-white">
+      {/* ================= HERO (flag video, same spacing as other pages) ================= */}
+      <section className="w-full pt-16 sm:pt-24">
+        <div className="relative w-full">
+          <video
+            src="/waiving_flag.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="
+              w-full
+              h-[72vh] sm:h-[85vh]
+              object-contain sm:object-cover
+              bg-black
+              brightness-125 contrast-110 saturate-110
+            "
+          />
 
-      <main>
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black pt-20 px-4 sm:px-6">
-          <div className="text-center z-10 px-4 sm:px-8 max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-white">
-              Contact Vegas Drones
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8">
-              Let&apos;s Make Your Las Vegas Drone Show Unforgettable
-            </p>
-            <a 
-              href="#contact-form" 
-              className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-neon-cyan text-black font-bold rounded-full hover:bg-cyan-400 transition-colors text-sm sm:text-base"
-            >
-              Get in Touch
-            </a>
+          {/* Overlay */}
+          <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
+            {/* Top block */}
+            <div className="pt-4 sm:pt-8 text-center">
+              <h1
+                className="
+                  font-orbitron font-bold
+                  text-3xl sm:text-5xl md:text-6xl
+                  leading-tight
+                  drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]
+                  px-3
+                "
+              >
+                Contact Patriot Drone Shows
+              </h1>
+
+              <p
+                className="
+                  text-gray-100
+                  mt-3 sm:mt-4
+                  max-w-3xl mx-auto
+                  text-base sm:text-xl md:text-2xl
+                  leading-relaxed
+                  drop-shadow-[0_0_14px_rgba(0,0,0,0.85)]
+                  px-3
+                "
+              >
+                Tell us your city, event date, and vision — we’ll reply with a recommended
+                drone count, pricing range, and next steps.
+              </p>
+            </div>
+
+            <div className="flex-1" />
+
+            {/* Bottom line */}
+            <div className="pb-3 sm:pb-6 text-center">
+              <h2
+                className="
+                  font-orbitron
+                  text-lg sm:text-2xl md:text-3xl
+                  font-bold
+                  text-white
+                  drop-shadow-[0_0_14px_rgba(0,0,0,0.9)]
+                  px-2
+                "
+              >
+                Nationwide patriotic drone light shows • Fast response • Custom quotes
+              </h2>
+            </div>
           </div>
-        </section>
+        </div>
 
-        {/* Contact Form Section */}
-        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8" id="contact-form">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 sm:mb-12 md:mb-16 text-white">
-              Get in Touch
-            </h2>
-            
-            {submitted ? (
-              <div className="text-center p-6 sm:p-8 bg-green-900 bg-opacity-50 rounded-lg">
-                <h3 className="text-lg sm:text-xl font-bold text-green-400 mb-3 sm:mb-4">Thank you for your message!</h3>
-                <p className="text-sm sm:text-base text-gray-300">We&apos;ll get back to you soon.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div className="form-group">
-                  <label htmlFor="name" className="block text-white mb-2 font-medium text-sm sm:text-base">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-neon-cyan focus:outline-none text-sm sm:text-base"
-                  />
-                </div>
+        {/* Buttons UNDER video */}
+        <div className="px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto flex justify-center pt-4 sm:pt-6 pb-8 sm:pb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
+              <a
+                href="#contact-form"
+                className="inline-flex items-center justify-center px-10 py-4 rounded-full font-orbitron font-bold
+                  bg-gradient-to-r from-red-500 via-white to-blue-500 text-black
+                  shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition"
+              >
+                Get in Touch
+              </a>
 
-                <div className="form-group">
-                  <label htmlFor="email" className="block text-white mb-2 font-medium text-sm sm:text-base">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-neon-cyan focus:outline-none text-sm sm:text-base"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message" className="block text-white mb-2 font-medium text-sm sm:text-base">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-neon-cyan focus:outline-none resize-vertical text-sm sm:text-base"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-neon-cyan text-black font-bold rounded-full hover:bg-cyan-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
-                </button>
-              </form>
-            )}
+              <a
+                href="/locations"
+                className="inline-flex items-center justify-center px-10 py-4 border border-white/30 text-white font-bold rounded-full
+                  hover:bg-white/10 transition font-orbitron"
+              >
+                View Locations
+              </a>
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <Footer />
-    </>
-  )
+      {/* ================= FORM ================= */}
+      <section id="contact-form" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-orbitron text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
+            Request Information
+          </h2>
+
+          <ContactForm />
+        </div>
+      </section>
+    </main>
+  );
 }

@@ -1,56 +1,58 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import HeaderPatriot from "../components/HeaderPatriot";
+import Footer from "../components/FooterPatriot";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.vegasdrones.com"),
+  metadataBase: new URL("https://www.patriotdroneshows.com"),
   title: {
-    default: "Vegas Drones | Spectacular Drone Light Shows in Las Vegas",
-    template: "%s | Vegas Drones",
+    default: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
+    template: "%s | Patriot Drone Shows",
   },
   description:
-    "Vegas Drones creates spectacular custom drone light shows in Las Vegas for weddings, corporate events, festivals, and brand activations. Book a breathtaking aerial experience today.",
+    "Patriot Drone Shows delivers breathtaking patriotic drone light shows nationwide for July 4th, Veterans Day, Memorial Day, city celebrations, festivals, and brand activations.",
   keywords: [
-    "drone show",
-    "drone shows",
-    "Las Vegas drone show",
-    "Las Vegas drones",
-    "wedding drone show",
-    "corporate drone show",
-    "drone advertising",
-    "Vegas Drones",
-    "aerial light show",
-    "event entertainment Las Vegas",
+    "patriotic drone show",
+    "patriot drone shows",
+    "July 4th drone show",
+    "4th of July drone light show",
+    "Veterans Day drone show",
+    "Memorial Day drone show",
+    "nationwide drone light show",
+    "drone show company",
+    "city drone show",
+    "municipal drone light show",
+    "drone fireworks show",
+    "fireworks alternative drone show",
   ],
+  alternates: { canonical: "https://www.patriotdroneshows.com/" },
   openGraph: {
     type: "website",
-    url: "https://www.vegasdrones.com",
-    title: "Vegas Drones | Spectacular Drone Light Shows in Las Vegas",
+    url: "https://www.patriotdroneshows.com/",
+    title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Custom 100–500+ drone light shows for weddings, corporate events, sports, and festivals in Las Vegas.",
-    siteName: "Vegas Drones",
+      "Book a custom patriotic drone light show anywhere in the U.S. Perfect for July 4th, Veterans Day, Memorial Day, city events, and festivals.",
+    siteName: "Patriot Drone Shows",
     images: [
       {
-        url: "/alienhead1.png",
+        url: "/patriot-og.png",
         width: 1200,
         height: 630,
-        alt: "Vegas Drones aerial light show over Las Vegas",
+        alt: "Patriot Drone Shows aerial display of a flag and stars",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vegas Drones | Spectacular Drone Light Shows in Las Vegas",
+    title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Breathtaking drone light shows for weddings, events, and brands in Las Vegas.",
-    images: ["/alienhead1.png"],
+      "Nationwide patriotic drone light shows for July 4th, Veterans Day, Memorial Day, and city celebrations.",
+    images: ["/patriot-og.png"],
   },
-  alternates: { canonical: "https://www.vegasdrones.com" },
   robots: {
     index: true,
     follow: true,
@@ -72,31 +74,26 @@ export const viewport: Viewport = {
   themeColor: "#000000",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const localBusinessJsonLd = {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const organizationJsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Vegas Drones",
-    url: "https://www.vegasdrones.com",
-    logo: "https://www.vegasdrones.com/alienhead1.png",
-    image: "https://www.vegasdrones.com/alienhead1.png",
-    description:
-      "Custom drone light shows in Las Vegas for weddings, corporate events, conventions, festivals, and brand activations.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Las Vegas",
-      addressRegion: "NV",
-      addressCountry: "US",
+    "@type": "Organization",
+    name: "Patriot Drone Shows",
+    url: "https://www.patriotdroneshows.com",
+    logo: "https://www.patriotdroneshows.com/patriot-og.png",
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Nationwide Patriotic Drone Light Shows",
+    provider: {
+      "@type": "Organization",
+      name: "Patriot Drone Shows",
+      url: "https://www.patriotdroneshows.com",
     },
-    areaServed: "Las Vegas NV",
-    sameAs: [
-      "https://www.instagram.com/vegasdrones",
-      "https://www.facebook.com/vegasdrones",
-    ],
+    areaServed: { "@type": "Country", name: "United States" },
+    serviceType: "Drone light show entertainment",
   };
 
   return (
@@ -112,12 +109,16 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
         />
       </head>
 
       <body className={`${inter.className} bg-black text-white`}>
-        <Header />
+        <HeaderPatriot />
         <main className="pt-10 md:pt-14">{children}</main>
         <Footer />
       </body>
