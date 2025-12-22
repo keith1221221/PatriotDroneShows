@@ -10,13 +10,15 @@ export const metadata: Metadata = {
     "patriot drone shows",
     "July 4th drone show",
     "4th of July drone light show",
+    "holiday drone light show",
+    "Christmas drone light shows",
+    "x-mas drone show",
     "Veterans Day drone show",
     "Memorial Day drone show",
     "nationwide drone light show",
     "drone show company",
     "city drone show",
     "municipal drone light show",
-    "military homecoming drone show",
     "drone light show near me",
   ],
   alternates: { canonical: "https://www.patriotdroneshows.com/" },
@@ -40,11 +42,10 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className="bg-black text-white">
+    <div className="bg-black text-white">
       {/* ================= HERO SECTION (FLAG VIDEO + OVERLAY) ================= */}
-      <section className="w-full pt-16 sm:pt-24">
+      <section className="w-full">
         <div className="relative w-full">
-          {/* Video */}
           <video
             src="/waiving_flag.mp4"
             autoPlay
@@ -60,9 +61,7 @@ export default function HomePage() {
             "
           />
 
-          {/* Overlay (TOP H1 + P, BOTTOM H2) */}
           <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
-            {/* Top block */}
             <div className="pt-4 sm:pt-8 text-center">
               <h1
                 className="
@@ -93,14 +92,12 @@ export default function HomePage() {
                 "
               >
                 Nationwide patriotic drone light shows for July 4th, America 250,
-                Memorial Day, city celebrations, festivals, and brand activations.
+                Memorial Day, Christmas and Holiday, city celebrations, festivals, and brand activations.
               </p>
             </div>
 
-            {/* Pushes H2 to the bottom of the video */}
             <div className="flex-1" />
 
-            {/* Bottom H2 (still overlaying video) */}
             <div className="pb-3 sm:pb-6 text-center">
               <h2
                 className="
@@ -119,7 +116,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ================= BUTTONS (UNDER VIDEO, NOT OVERLAYING) ================= */}
+        {/* ================= BUTTONS (UNDER VIDEO) ================= */}
         <div className="px-4 sm:px-6">
           <div className="max-w-5xl mx-auto flex justify-center pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
@@ -148,7 +145,6 @@ export default function HomePage() {
       {/* ================= SECOND HERO (VIMEO + OVERLAY) ================= */}
       <section className="w-full bg-black">
         <div className="relative w-full h-[75vh] sm:h-[80vh] overflow-hidden bg-black">
-          {/* Vimeo background video */}
           <div className="absolute inset-0">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative w-[120%] sm:w-[110%] md:w-[105%] lg:w-full aspect-video">
@@ -164,47 +160,44 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Overlay content */}
           <div className="relative z-10 h-full flex flex-col justify-between px-4 sm:px-6">
-            {/* SEO text (top) */}
-<div className="pt-8 flex justify-center text-center">
-  <div className="max-w-3xl">
-    <p
-      className="
-        text-gray-100
-        text-lg sm:text-xl md:text-2xl
-        leading-relaxed sm:leading-loose
-        drop-shadow-[0_0_14px_rgba(0,0,0,0.9)]
-      "
-    >
-      Patriot Drone Shows specializes in{" "}
-      <Link
-        href="/patriotic-drone-light-shows"
-        className="text-white underline decoration-white/40 hover:decoration-white"
-      >
-        nationwide patriotic drone light shows
-      </Link>{" "}
-      designed for America 250 celebrations, national holidays, and large-scale
-      city events. Learn more about our{" "}
-      <Link
-        href="/america-250-celebrations"
-        className="text-white underline decoration-white/40 hover:decoration-white"
-      >
-        America 250 drone shows
-      </Link>{" "}
-      or explore our{" "}
-      <Link
-        href="/locations"
-        className="text-white underline decoration-white/40 hover:decoration-white"
-      >
-        nationwide locations
-      </Link>{" "}
-      to see where we operate.
-    </p>
-  </div>
-</div>
+            <div className="pt-8 flex justify-center text-center">
+              <div className="max-w-3xl">
+                <p
+                  className="
+                    text-gray-100
+                    text-lg sm:text-xl md:text-2xl
+                    leading-relaxed sm:leading-loose
+                    drop-shadow-[0_0_14px_rgba(0,0,0,0.9)]
+                  "
+                >
+                  Patriot Drone Shows specializes in{" "}
+                  <Link
+                    href="/patriotic-drone-light-shows"
+                    className="text-white underline decoration-white/40 hover:decoration-white"
+                  >
+                    nationwide patriotic drone light shows
+                  </Link>{" "}
+                  designed for America 250 celebrations, national holidays, and
+                  large-scale city events. Learn more about our{" "}
+                  <Link
+                    href="/america-250-celebrations"
+                    className="text-white underline decoration-white/40 hover:decoration-white"
+                  >
+                    America 250 drone shows
+                  </Link>{" "}
+                  or explore our{" "}
+                  <Link
+                    href="/locations"
+                    className="text-white underline decoration-white/40 hover:decoration-white"
+                  >
+                    nationwide locations
+                  </Link>{" "}
+                  to see where we operate.
+                </p>
+              </div>
+            </div>
 
-            {/* CTA (bottom) */}
             <div className="pb-10 flex justify-center">
               <Link
                 href="/chatbot"
@@ -256,34 +249,22 @@ export default function HomePage() {
         </h2>
 
         <div className="max-w-4xl mx-auto space-y-10">
-        {[
-  "1147884804",
-  "1148138573",
-  "1147884017",
-].map((id) => (
-  <div key={id} className="aspect-video relative">
-    <iframe
-      src={`https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0`}
-      title="Patriot Drone Shows video"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowFullScreen
-      loading="lazy"
-      className="w-full h-full rounded-[2rem] shadow-2xl border border-gray-700"
-    />
-  </div>
-))}
-
+          {["1147884804", "1148138573", "1147884017"].map((id) => (
+            <div key={id} className="aspect-video relative">
+              <iframe
+                src={`https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0`}
+                title="Patriot Drone Shows video"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                className="w-full h-full rounded-[2rem] shadow-2xl border border-gray-700"
+              />
+            </div>
+          ))}
         </div>
 
         <div className="text-center mt-12">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-3 border border-white/30
-              text-white font-bold py-4 px-8 rounded-full transition-all duration-300
-              hover:border-white hover:bg-white/10 transform hover:scale-[1.02] font-orbitron"
-          >
-            View Full Portfolio
-          </Link>
+         
         </div>
       </section>
 
@@ -312,15 +293,14 @@ export default function HomePage() {
         </div>
 
         <p className="text-gray-400 mt-6 text-sm">
-          Operated by Skyltight LLC • Nationwide service • FAA Part 107 •
+          Operated by Skylight Ads LLC • Nationwide service • FAA Part 107 •
           Insured operations
         </p>
       </section>
-    </main>
+    </div>
   );
 }
 
-/* ================= FEATURE CARD ================= */
 function Feature({
   icon,
   title,

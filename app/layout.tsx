@@ -1,10 +1,18 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Orbitron, Poppins } from "next/font/google";
+import Script from "next/script";
 import HeaderPatriot from "../components/HeaderPatriot";
 import Footer from "../components/FooterPatriot";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+const orbitron = Orbitron({ subsets: ["latin"], display: "swap", variable: "--font-orbitron" });
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.patriotdroneshows.com"),
@@ -17,24 +25,25 @@ export const metadata: Metadata = {
   keywords: [
     "patriotic drone show",
     "patriot drone shows",
-    "July 4th drone show",
-    "4th of July drone light show",
     "Veterans Day drone show",
     "Memorial Day drone show",
     "nationwide drone light show",
+    "Chrismas drone light show",
+    "X-mas drone light shows",
+    "New Years Eve Drone Shows",
     "drone show company",
     "city drone show",
     "municipal drone light show",
     "drone fireworks show",
     "fireworks alternative drone show",
+    "America 250 drone show",
   ],
-  alternates: { canonical: "https://www.patriotdroneshows.com/" },
   openGraph: {
     type: "website",
     url: "https://www.patriotdroneshows.com/",
     title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Book a custom patriotic drone light show anywhere in the U.S. Perfect for July 4th, Veterans Day, Memorial Day, city events, and festivals.",
+      "Book a custom patriotic drone light show anywhere in the U.S. Perfect for America 250 celebrations, Veterans Day, Memorial Day, city events, and festivals.",
     siteName: "Patriot Drone Shows",
     images: [
       {
@@ -50,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Nationwide patriotic drone light shows for July 4th, Veterans Day, Memorial Day, and city celebrations.",
+      "Nationwide patriotic drone light shows for America 250, Veterans Day, Memorial Day, and city celebrations.",
     images: ["/patriot-og.png"],
   },
   robots: {
@@ -65,6 +74,12 @@ export const metadata: Metadata = {
     },
   },
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
+
+  // Optional (highly recommended): add verification codes when you have them
+  // verification: {
+  //   google: "YOUR_GOOGLE_VERIFICATION_CODE",
+  //   other: { "msvalidate.01": "YOUR_BING_CODE" },
+  // },
 };
 
 export const viewport: Viewport = {
@@ -75,12 +90,21 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const baseUrl = "https://www.patriotdroneshows.com";
+
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Patriot Drone Shows",
-    url: "https://www.patriotdroneshows.com",
-    logo: "https://www.patriotdroneshows.com/patriot-og.png",
+    url: baseUrl,
+    logo: `${baseUrl}/patriot-og.png`,
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Patriot Drone Shows",
+    url: baseUrl,
   };
 
   const serviceJsonLd = {
@@ -90,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     provider: {
       "@type": "Organization",
       name: "Patriot Drone Shows",
-      url: "https://www.patriotdroneshows.com",
+      url: baseUrl,
     },
     areaServed: { "@type": "Country", name: "United States" },
     serviceType: "Drone light show entertainment",
@@ -98,28 +122,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        />
-        <script
+      <body
+        className={[
+          inter.className,
+          orbitron.variable,
+          poppins.variable,
+          "bg-black text-white",
+        ].join(" ")}
+      >
+        {/* JSON-LD (safe + stable) */}
+        <Script
+          id="ld-org"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <script
+        <Script
+          id="ld-website"
           type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <Script
+          id="ld-service"
+          type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
         />
-      </head>
 
-      <body className={`${inter.className} bg-black text-white`}>
         <HeaderPatriot />
-        <main className="pt-10 md:pt-14">{children}</main>
+
+        {/* IMPORTANT: fixed-header offset lives here (pages should NOT add their own top padding) */}
+        <main className="pt-[64px] md:pt-[72px]">{children}</main>
+
         <Footer />
       </body>
     </html>

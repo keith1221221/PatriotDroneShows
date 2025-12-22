@@ -62,8 +62,8 @@ export default function PatrioticDroneShowsPage() {
                   px-3
                 "
               >
-                Nationwide drone light shows designed for July 4th, America 250,
-                Veterans Day, Memorial Day, and city celebrations.
+                Nationwide drone light shows designed for America 250,
+               Christmas, Holiday's, Memorial Day, and city celebrations.
               </p>
             </div>
 
