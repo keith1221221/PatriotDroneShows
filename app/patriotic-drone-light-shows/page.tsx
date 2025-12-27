@@ -50,38 +50,26 @@ export default function PatrioticDroneShowsPage() {
       </Script>
 
       {/* ================= HERO (SERVICE PAGE, SAME SPACING AS HOME) ================= */}
-      <section className="w-full pt-16 sm:pt-24">
+      <section className="w-full pt-2 sm:pt-24">
         <div className="relative w-full">
-          {/* MOBILE: FAST LCP IMAGE */}
-          <div className="sm:hidden">
-            <Image
-              src="/flag_400.webp"
-              alt="Waving American flag"
-              width={800}
-              height={1200}
-              priority
-              className="w-full h-[72vh] object-cover bg-black"
-            />
-          </div>
-
-          {/* SM+ ONLY: Flag video */}
+          {/* HERO VIDEO (NOW ON MOBILE TOO) */}
           <video
-            src="/waiving_flag.mp4"
             autoPlay
             muted
             loop
             playsInline
-            preload="none"
+            preload="metadata"
             poster="/flag_400.webp"
             className="
-              hidden sm:block
               w-full
               h-[72vh] sm:h-[85vh]
-              object-cover
+              object-contain sm:object-cover
               bg-black
               brightness-125 contrast-110 saturate-110
             "
-          />
+          >
+            <source src="/flag_hero_720.mp4" type="video/mp4" />
+          </video>
 
           {/* Overlay */}
           <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
@@ -118,7 +106,7 @@ export default function PatrioticDroneShowsPage() {
             <div className="flex-1" />
 
             {/* BOTTOM */}
-            <div className="pb-3 sm:pb-6 text-center">
+            <div className="pb-24 sm:pb-6 text-center">
               <h2
                 className="
                   font-orbitron
@@ -137,7 +125,7 @@ export default function PatrioticDroneShowsPage() {
 
         {/* ================= BUTTONS ================= */}
         <div className="px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto flex justify-center pt-4 sm:pt-6 pb-10 sm:pb-12">
+          <div className="max-w-5xl mx-auto flex justify-center pt-0 sm:pt-2 pb-10 sm:pb-12">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
               <Link
                 href="/request-a-quote"
