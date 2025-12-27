@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import Script from "next/script";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,22 +15,69 @@ export const metadata: Metadata = {
 export default function PatrioticDroneShowsPage() {
   return (
     <main className="bg-black text-white">
+      {/* Lazy-load Vimeo src only when section is near viewport (including mobile) */}
+      <Script id="lazy-vimeo-bg" strategy="afterInteractive">
+        {`
+          (function () {
+            var iframe = document.getElementById("vimeo-bg");
+            if (!iframe) return;
+
+            var dataSrc = iframe.getAttribute("data-src");
+            if (!dataSrc) return;
+
+            function load() {
+              if (iframe.getAttribute("src")) return;
+              iframe.setAttribute("src", dataSrc);
+            }
+
+            // Fallback if IO not supported
+            if (!("IntersectionObserver" in window)) {
+              setTimeout(load, 1200);
+              return;
+            }
+
+            var io = new IntersectionObserver(function(entries) {
+              if (!entries || !entries.length) return;
+              if (entries[0].isIntersecting) {
+                load();
+                io.disconnect();
+              }
+            }, { rootMargin: "300px" });
+
+            io.observe(iframe);
+          })();
+        `}
+      </Script>
 
       {/* ================= HERO (SERVICE PAGE, SAME SPACING AS HOME) ================= */}
       <section className="w-full pt-16 sm:pt-24">
         <div className="relative w-full">
+          {/* MOBILE: FAST LCP IMAGE */}
+          <div className="sm:hidden">
+            <Image
+              src="/flag_400.webp"
+              alt="Waving American flag"
+              width={800}
+              height={1200}
+              priority
+              className="w-full h-[72vh] object-cover bg-black"
+            />
+          </div>
 
-          {/* Flag video */}
+          {/* SM+ ONLY: Flag video */}
           <video
             src="/waiving_flag.mp4"
             autoPlay
             muted
             loop
             playsInline
+            preload="none"
+            poster="/flag_400.webp"
             className="
+              hidden sm:block
               w-full
               h-[72vh] sm:h-[85vh]
-              object-contain sm:object-cover
+              object-cover
               bg-black
               brightness-125 contrast-110 saturate-110
             "
@@ -36,7 +85,6 @@ export default function PatrioticDroneShowsPage() {
 
           {/* Overlay */}
           <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
-
             {/* TOP */}
             <div className="pt-4 sm:pt-8 text-center">
               <h1
@@ -62,8 +110,8 @@ export default function PatrioticDroneShowsPage() {
                   px-3
                 "
               >
-                Nationwide drone light shows designed for America 250,
-               Christmas, Holiday's, Memorial Day, and city celebrations.
+                Nationwide drone light shows designed for America 250, Christmas,
+                Holidays, Memorial Day, and city celebrations.
               </p>
             </div>
 
@@ -131,9 +179,9 @@ export default function PatrioticDroneShowsPage() {
             <span className="text-white font-semibold">
               large-scale patriotic drone light shows
             </span>{" "}
-            for national holidays, municipal celebrations, and civic events.
-            Our shows are quiet, eco-friendly, and fully customizable — delivering
-            a modern alternative to fireworks.
+            for national holidays, municipal celebrations, and civic events. Our
+            shows are quiet, eco-friendly, and fully customizable — delivering a
+            modern alternative to fireworks.
           </p>
         </div>
       </section>
@@ -141,21 +189,36 @@ export default function PatrioticDroneShowsPage() {
       {/* ================= FIREWORKS ALTERNATIVE ================= */}
       <section className="relative w-full h-[70vh] sm:h-[75vh] overflow-hidden bg-black">
         <div className="absolute inset-0 overflow-hidden bg-black">
+          {/* Lightweight paint immediately (helps perceived speed) */}
+          <Image
+            src="/flag_400.webp"
+            alt="Patriotic backdrop"
+            width={1200}
+            height={800}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          />
+
+          {/* Vimeo loads ONLY when near viewport (mobile included) */}
           <iframe
-            src="https://player.vimeo.com/video/1147748380?autoplay=1&muted=1&loop=1&background=1&playsinline=1"
+            id="vimeo-bg"
+            data-src="https://player.vimeo.com/video/1147748380?autoplay=1&muted=1&loop=1&background=1&playsinline=1"
+            src="" /* intentionally blank until script sets it */
             title="Fireworks Alternative Drone Show"
             allow="autoplay; fullscreen; picture-in-picture"
+            loading="lazy"
             className="
               absolute left-1/2 top-1/2
               w-[177.78vh] h-[56.25vw]
               min-w-full min-h-full
               -translate-x-1/2 -translate-y-1/2
               pointer-events-none
+              opacity-90
             "
           />
         </div>
 
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/25" />
 
         <div className="relative z-10 h-full flex items-end px-4 pb-10 sm:pb-16">
           <div className="max-w-3xl mx-auto text-center">
