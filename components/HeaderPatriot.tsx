@@ -12,7 +12,7 @@ export default function HeaderPatriot() {
     { href: "/", label: "Home" },
     { href: "/patriotic-drone-light-shows", label: "Drone Shows" },
     { href: "/america-250-celebrations", label: "America 250" },
-    
+    { href: "/national-drone-light-show-operator", label: "Nationwide" },
     { href: "/locations", label: "Locations" },
     { href: "/contact", label: "Get a Quote" },
   ];
