@@ -179,12 +179,12 @@ export default function PatrioticDroneShowsPage() {
         <div className="absolute inset-0 overflow-hidden bg-black">
           {/* Lightweight paint immediately (helps perceived speed) */}
           <Image
-            src="/flag_400.webp"
+            src="/fireworks_comp.webp"
             alt="Patriotic backdrop"
             width={1200}
             height={800}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
           />
 
           {/* Vimeo loads ONLY when near viewport (mobile included) */}
@@ -201,12 +201,12 @@ export default function PatrioticDroneShowsPage() {
               min-w-full min-h-full
               -translate-x-1/2 -translate-y-1/2
               pointer-events-none
-              opacity-90
+              opacity-100
             "
           />
         </div>
 
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-black/5" />
 
         <div className="relative z-10 h-full flex items-end px-4 pb-10 sm:pb-16">
           <div className="max-w-3xl mx-auto text-center">

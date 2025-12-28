@@ -174,6 +174,34 @@ export default function NevadaDroneLightShowsPage() {
           </p>
         </div>
       </section>
+{/* ================= LAS VEGAS CTA (CROSS-BRAND) ================= */}
+<section className="py-12 px-4 sm:px-6 border-t border-white/10">
+  <div className="max-w-5xl mx-auto text-center">
+    <h2 className="font-orbitron text-2xl sm:text-3xl font-bold">
+      Planning a Las Vegas Drone Light Show?
+    </h2>
+
+    <p className="text-gray-300 mt-4 max-w-3xl mx-auto leading-relaxed">
+      For Las Vegas–based venue, corporate, and local productions, visit our
+      local partner brand for the Strip and greater Las Vegas market.
+    </p>
+
+    <div className="mt-8 flex justify-center">
+      <a
+        href="https://www.vegasdrones.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition font-orbitron"
+      >
+        Visit VegasDrones.com
+      </a>
+    </div>
+
+    <p className="text-sm text-gray-500 mt-4">
+      (Opens in a new tab)
+    </p>
+  </div>
+</section>
 
       {/* ================= FAQ ================= */}
       <section className="py-20 px-4 sm:px-6 border-t border-white/10">
