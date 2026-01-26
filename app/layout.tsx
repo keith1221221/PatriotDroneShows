@@ -6,13 +6,23 @@ import HeaderPatriot from "../components/HeaderPatriot";
 import Footer from "../components/FooterPatriot";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
-const orbitron = Orbitron({ subsets: ["latin"], display: "swap", variable: "--font-orbitron" });
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-orbitron",
+});
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "600", "700"],
   variable: "--font-poppins",
 });
+
+// ✅ GTM container ID (Patriot)
+const GTM_ID = "GTM-MDSHQQCP";
+
+// Optional: set these later (recommended via env vars)
+// const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.patriotdroneshows.com"),
@@ -75,7 +85,7 @@ export const metadata: Metadata = {
   },
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
 
-  // Optional (highly recommended): add verification codes when you have them
+  // ✅ Add these when you have them:
   // verification: {
   //   google: "YOUR_GOOGLE_VERIFICATION_CODE",
   //   other: { "msvalidate.01": "YOUR_BING_CODE" },
@@ -130,6 +140,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "bg-black text-white",
         ].join(" ")}
       >
+        {/* ✅ Google Tag Manager (script) */}
+        <Script
+          id="gtm"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `,
+          }}
+        />
+
+        {/* ✅ Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
         {/* JSON-LD (safe + stable) */}
         <Script
           id="ld-org"

@@ -6,10 +6,26 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Patriotic Drone Light Shows Nationwide | Patriot Drone Shows",
   description:
-    "Patriot Drone Shows provides large-scale patriotic drone light shows nationwide for July 4th, America 250, Veterans Day, Memorial Day, and city celebrations — a modern alternative to fireworks.",
+    "Patriot Drone Shows produces large-scale patriotic drone light shows nationwide for America 250, July 4th, Veterans Day, Memorial Day, and city celebrations — a modern alternative to fireworks.",
   alternates: {
-    canonical: "https://www.patriotdroneshows.com/patriotic-drone-shows",
+    canonical: "https://www.patriotdroneshows.com/patriotic-drone-light-shows",
   },
+  openGraph: {
+    title: "Patriotic Drone Light Shows Nationwide | Patriot Drone Shows",
+    description:
+      "Nationwide patriotic drone shows for America 250 and major city celebrations — a modern alternative to fireworks without fallout.",
+    url: "https://www.patriotdroneshows.com/patriotic-drone-light-shows",
+    siteName: "Patriot Drone Shows",
+    images: [
+      {
+        url: "https://www.patriotdroneshows.com/flag_400.webp",
+        width: 1200,
+        height: 630,
+        alt: "Patriot Drone Shows patriotic drone light show",
+      },
+    ],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function PatrioticDroneShowsPage() {
@@ -52,7 +68,7 @@ export default function PatrioticDroneShowsPage() {
       {/* ================= HERO ================= */}
       <section className="w-full pt-2 sm:pt-24">
         <div className="relative w-full">
-          {/* HERO VIDEO (mobile + desktop) */}
+          {/* HERO VIDEO */}
           <video
             autoPlay
             muted
@@ -62,7 +78,7 @@ export default function PatrioticDroneShowsPage() {
             poster="/flag_400.webp"
             className="
               w-full
-              h-[64vh] sm:h-[85vh]
+              h-[66vh] sm:h-[86vh]
               object-cover
               object-[center_70%]
               bg-black
@@ -72,10 +88,13 @@ export default function PatrioticDroneShowsPage() {
             <source src="/flag_hero_720.mp4" type="video/mp4" />
           </video>
 
-          {/* Overlay */}
+          {/* Overlays for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/25 to-black/70" />
+
+          {/* Hero content */}
           <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
             {/* TOP */}
-            <div className="pt-3 sm:pt-8 text-center">
+            <div className="pt-4 sm:pt-10 text-center">
               <h1
                 className="
                   font-orbitron font-bold
@@ -99,15 +118,15 @@ export default function PatrioticDroneShowsPage() {
                   px-3
                 "
               >
-                Nationwide drone light shows designed for America 250, Christmas,
-                Holidays, Memorial Day, and city celebrations.
+                Nationwide patriotic drone light shows for America 250, July 4th,
+                Memorial Day, Veterans Day, and city celebrations.
               </p>
             </div>
 
             <div className="flex-1" />
 
             {/* BOTTOM */}
-            <div className="pb-6 sm:pb-6 text-center">
+            <div className="pb-6 sm:pb-10 text-center">
               <h2
                 className="
                   font-orbitron
@@ -118,15 +137,19 @@ export default function PatrioticDroneShowsPage() {
                   px-2
                 "
               >
-                Patriotic Drone Shows That Replace Fireworks — Without the Fallout
+                Replace Fireworks — Without the Fallout
               </h2>
+
+              <p className="mt-2 text-sm sm:text-base text-gray-100/90 drop-shadow-[0_0_14px_rgba(0,0,0,0.9)]">
+                Venue-safe • Quiet • No smoke • No debris • Fully insured • FAA-compliant operations
+              </p>
             </div>
           </div>
         </div>
 
-        {/* ================= BUTTONS ================= */}
+        {/* ================= PRIMARY CTA BUTTONS ================= */}
         <div className="px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto flex justify-center pt-3 sm:pt-4 pb-10 sm:pb-12">
+          <div className="max-w-5xl mx-auto flex justify-center pt-4 pb-10 sm:pb-12">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
               <Link
                 href="/contact"
@@ -160,40 +183,76 @@ export default function PatrioticDroneShowsPage() {
         </div>
       </section>
 
+      {/* ================= QUICK LINKS (REAL ROUTES ONLY) ================= */}
+      <section className="px-4 sm:px-6 pb-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-gray-800 bg-gray-900/30 p-6 sm:p-8">
+            <h2 className="font-orbitron text-2xl sm:text-3xl font-bold text-center">
+              Start Here
+            </h2>
+            <p className="mt-3 text-gray-300 text-center max-w-3xl mx-auto">
+              Jump to the page that matches your event type and planning stage.
+            </p>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+              <QuickLink
+                href="/america-250-celebrations"
+                title="America 250 Celebrations"
+                desc="Large-scale patriotic storytelling for the 250th anniversary of America."
+              />
+              <QuickLink
+                href="/national-drone-light-show-operator"
+                title="National Operator"
+                desc="A single nationwide standard for city events and large public gatherings."
+              />
+              <QuickLink
+                href="/locations"
+                title="Nationwide Locations"
+                desc="Teams positioned across the U.S. for rapid deployment and consistent delivery."
+              />
+              <QuickLink
+                href="/faq"
+                title="Planning & Safety FAQ"
+                desc="Permitting, safety approach, FAA compliance, and logistics explained."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ================= INTRO ================= */}
-      <section className="pt-8 pb-4 sm:pt-12 sm:pb-8 px-4 sm:px-6">
+      <section className="pt-4 pb-10 sm:pt-8 sm:pb-14 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-300 text-lg leading-relaxed">
             Patriot Drone Shows specializes in{" "}
             <span className="text-white font-semibold">
               large-scale patriotic drone light shows
             </span>{" "}
-            for national holidays, municipal celebrations, and civic events. Our
-            shows are quiet, eco-friendly, and fully customizable — delivering a
+            for national holidays, municipal celebrations, and civic events.
+            Our shows are quiet, eco-friendly, and fully customizable — delivering a
             modern alternative to fireworks.
           </p>
 
           <p className="mt-5 text-gray-300 text-lg leading-relaxed">
             From America 250 celebrations and July 4th events to Veterans Day and
-            Memorial Day tributes, we design drone light shows that scale for
-            your audience size and your venue — with professional planning,
-            permitting support, and a consistent execution standard anywhere in
-            the United States.
+            Memorial Day tributes, we design drone shows that scale for your audience
+            and your venue — with professional planning, permitting support, and a
+            consistent execution standard nationwide.
           </p>
         </div>
       </section>
 
-      {/* ================= FIREWORKS ALTERNATIVE ================= */}
-      <section className="relative w-full h-[70vh] sm:h-[75vh] overflow-hidden bg-black">
+      {/* ================= FIREWORKS ALTERNATIVE (VIDEO BG) ================= */}
+      <section className="relative w-full h-[72vh] sm:h-[78vh] overflow-hidden bg-black">
         <div className="absolute inset-0 overflow-hidden bg-black">
-          {/* Lightweight paint immediately (helps perceived speed) */}
+          {/* Lightweight paint immediately */}
           <Image
             src="/fireworks_comp.webp"
             alt="Patriotic backdrop"
-            width={1200}
-            height={800}
+            width={1600}
+            height={900}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover opacity-99"
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
           />
 
           {/* Vimeo loads ONLY when near viewport */}
@@ -210,24 +269,47 @@ export default function PatrioticDroneShowsPage() {
               min-w-full min-h-full
               -translate-x-1/2 -translate-y-1/2
               pointer-events-none
-              opacity-99
+              opacity-100
             "
           />
         </div>
 
-        <div className="absolute inset-0 bg-black/1" />
+        {/* Darken for text readability */}
+        <div className="absolute inset-0 bg-black/55" />
 
-        {/* Center content on mobile; keep lower-third feel on desktop */}
-        <div className="relative z-10 h-full flex sm:items-end px-4 pb-10 sm:pb-16">
-          <div className="max-w-3xl mx-auto text-center mt-24 sm:mt-16">
-            <h2 className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
+        <div className="relative z-10 h-full flex items-center px-4 sm:px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
               A Powerful Alternative to Fireworks
             </h2>
 
-            <p className="mt-80 sm:mt-8 text-lg sm:text-xl text-gray-100 leading-relaxed drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
-              Create fireworks-style excitement with hundreds of synchronized
-              drones — without fire risk, loud explosions, or environmental impact.
+            <p className="mt-5 text-lg sm:text-xl text-gray-100 leading-relaxed drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
+              Create fireworks-style excitement with hundreds of synchronized drones —
+              without fire risk, loud explosions, or debris.
             </p>
+
+            <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/contact"
+                className="
+                  inline-flex justify-center items-center
+                  bg-white text-black font-bold py-4 px-8 rounded-full
+                  hover:bg-gray-200 transition font-orbitron
+                "
+              >
+                Get a Quote
+              </Link>
+              <Link
+                href="/faq"
+                className="
+                  inline-flex justify-center items-center
+                  border border-white/30 text-white font-bold py-4 px-8 rounded-full
+                  hover:border-white hover:bg-white/10 transition font-orbitron
+                "
+              >
+                Planning & Safety FAQ
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -255,6 +337,62 @@ export default function PatrioticDroneShowsPage() {
             Permitted, insured shows for large public gatherings nationwide.
           </UseCase>
         </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/america-250-celebrations"
+            className="
+              inline-flex justify-center items-center
+              bg-gradient-to-r from-red-500 via-white to-blue-500
+              text-black font-bold py-4 px-9 rounded-full
+              shadow-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+              transform hover:scale-105 transition
+              font-orbitron
+            "
+          >
+            Explore America 250 Shows
+          </Link>
+        </div>
+      </section>
+
+      {/* ================= STATE SEO HUBS (YOU ALREADY HAVE THESE ROUTES) ================= */}
+      <section className="py-14 sm:py-16 px-4 sm:px-6">
+        <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-center mb-10">
+          Statewide Patriotic Drone Shows
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <QuickLink
+            href="/california-drone-light-shows"
+            title="California Drone Shows"
+            desc="City, coastal, and large public drone sources statewide."
+          />
+          <QuickLink
+            href="/nevada-drone-light-shows"
+            title="Nevada Drone Shows"
+            desc="Municipal and major event drone shows across Nevada."
+          />
+          <QuickLink
+            href="/arizona-drone-light-shows"
+            title="Arizona Drone Shows"
+            desc="Drone shows built for desert venues and large crowds."
+          />
+          <QuickLink
+            href="/utah-drone-light-shows"
+            title="Utah Drone Shows"
+            desc="Community celebrations and city events statewide."
+          />
+          <QuickLink
+            href="/colorado-drone-light-shows"
+            title="Colorado Drone Shows"
+            desc="City and resort events with scalable productions."
+          />
+          <QuickLink
+            href="/locations"
+            title="All Locations"
+            desc="See our nationwide coverage and where we deploy teams."
+          />
+        </div>
       </section>
 
       {/* ================= NATIONWIDE NETWORK ================= */}
@@ -276,17 +414,16 @@ export default function PatrioticDroneShowsPage() {
             </p>
 
             <p className="mt-6 text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
-              Every show follows the same operational standards, creative process,
-              and execution framework. Whether your event is in a major metro, a
-              coastal city, or a rural community, you receive the same
-              professional-grade production, custom animation design, and
-              coordinated execution.
+              Every show follows the same operational standards, creative process, and
+              execution framework. Whether your event is in a major metro, a coastal city,
+              or a rural community, you receive the same professional-grade production,
+              custom animation design, and coordinated execution.
             </p>
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
               <NetworkPill title="Nationwide Coverage">
-                Teams positioned across the U.S. allow rapid deployment to cities,
-                venues, and event sites nationwide.
+                Teams positioned across the U.S. allow rapid deployment to cities, venues,
+                and event sites nationwide.
               </NetworkPill>
 
               <NetworkPill title="Standardized Operations">
@@ -300,23 +437,61 @@ export default function PatrioticDroneShowsPage() {
               </NetworkPill>
             </div>
 
-            <div className="mt-10 flex justify-center">
+            <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/contact"
                 className="
                   inline-flex justify-center items-center
                   bg-white text-black font-bold py-4 px-8 rounded-full
-                  hover:bg-gray-200 transition
-                  font-orbitron
+                  hover:bg-gray-200 transition font-orbitron
                 "
               >
                 Plan a Nationwide Drone Show
               </Link>
+
+              <Link
+                href="/national-drone-light-show-operator"
+                className="
+                  inline-flex justify-center items-center
+                  border border-white/30 text-white font-bold py-4 px-8 rounded-full
+                  hover:border-white hover:bg-white/10 transition font-orbitron
+                "
+              >
+                Why a National Operator
+              </Link>
             </div>
+          </div>
+
+          <div className="mt-10 text-center text-gray-500 text-sm">
+            Operated by Skylight Ads LLC • Nationwide network • FAA Part 107 • Insured operations
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+/* ================= QUICK LINK CARD ================= */
+function QuickLink({
+  href,
+  title,
+  desc,
+}: {
+  href: string;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group rounded-2xl border border-gray-800 bg-black/30 p-5 hover:bg-white/5 transition"
+    >
+      <div className="font-orbitron text-lg font-bold text-white">{title}</div>
+      <p className="mt-2 text-gray-300 text-sm leading-relaxed">{desc}</p>
+      <div className="mt-3 font-orbitron text-sm text-white/80 group-hover:text-white">
+        View →
+      </div>
+    </Link>
   );
 }
 
@@ -329,7 +504,7 @@ function UseCase({
   children: React.ReactNode;
 }) {
   return (
-    <div className="text-center p-8 bg-gray-900 rounded-3xl border border-gray-800 shadow-lg">
+    <div className="text-center p-8 bg-gray-900/60 rounded-3xl border border-gray-800 shadow-lg">
       <h3 className="font-orbitron text-xl font-bold mb-3">{title}</h3>
       <p className="text-gray-300">{children}</p>
     </div>
