@@ -21,8 +21,8 @@ const poppins = Poppins({
 // ✅ GTM container ID (Patriot)
 const GTM_ID = "GTM-MDSHQQCP";
 
-// Optional: set these later (recommended via env vars)
-// const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
+// ✅ Clarity project ID (Patriot)
+const CLARITY_ID = "v7o6rravyt";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.patriotdroneshows.com"),
@@ -31,29 +31,29 @@ export const metadata: Metadata = {
     template: "%s | Patriot Drone Shows",
   },
   description:
-    "Patriot Drone Shows delivers breathtaking patriotic drone light shows nationwide for July 4th, Veterans Day, Memorial Day, city celebrations, festivals, and brand activations.",
+    "Patriot Drone Shows delivers breathtaking patriotic drone light shows nationwide for July 4th, Veterans Day, Memorial Day, America 250 celebrations, city events, and festivals — a modern alternative to fireworks.",
   keywords: [
     "patriotic drone show",
     "patriot drone shows",
-    "Veterans Day drone show",
-    "Memorial Day drone show",
     "nationwide drone light show",
-    "Chrismas drone light show",
-    "X-mas drone light shows",
-    "New Years Eve Drone Shows",
-    "drone show company",
-    "city drone show",
-    "municipal drone light show",
     "drone fireworks show",
     "fireworks alternative drone show",
     "America 250 drone show",
+    "July 4th drone show",
+    "Veterans Day drone show",
+    "Memorial Day drone show",
+    "city drone show",
+    "municipal drone light show",
+    "drone show company",
+    "drone light shows nationwide",
   ],
+  alternates: { canonical: "https://www.patriotdroneshows.com/" },
   openGraph: {
     type: "website",
     url: "https://www.patriotdroneshows.com/",
     title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Book a custom patriotic drone light show anywhere in the U.S. Perfect for America 250 celebrations, Veterans Day, Memorial Day, city events, and festivals.",
+      "Book a custom patriotic drone light show anywhere in the U.S. Perfect for America 250 celebrations, Veterans Day, Memorial Day, July 4th, and city events.",
     siteName: "Patriot Drone Shows",
     images: [
       {
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Patriot Drone Shows | Nationwide Patriotic Drone Light Shows",
     description:
-      "Nationwide patriotic drone light shows for America 250, Veterans Day, Memorial Day, and city celebrations.",
+      "Nationwide patriotic drone light shows for America 250, Veterans Day, Memorial Day, July 4th, and city celebrations.",
     images: ["/patriot-og.png"],
   },
   robots: {
@@ -102,12 +102,20 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const baseUrl = "https://www.patriotdroneshows.com";
 
+  // ✅ More complete JSON-LD (still “safe” — no invented phone/address)
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Patriot Drone Shows",
     url: baseUrl,
     logo: `${baseUrl}/patriot-og.png`,
+    // Add socials when you’re ready (don’t add placeholders you don’t own)
+    // sameAs: [
+    //   "https://www.facebook.com/YOUR_PAGE",
+    //   "https://www.instagram.com/YOUR_HANDLE",
+    //   "https://www.youtube.com/@YOUR_CHANNEL",
+    //   "https://www.linkedin.com/company/YOUR_COMPANY",
+    // ],
   };
 
   const websiteJsonLd = {
@@ -115,19 +123,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     name: "Patriot Drone Shows",
     url: baseUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${baseUrl}/search?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   };
 
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Nationwide Patriotic Drone Light Shows",
+    serviceType: "Drone light show entertainment",
     provider: {
       "@type": "Organization",
       name: "Patriot Drone Shows",
       url: baseUrl,
     },
     areaServed: { "@type": "Country", name: "United States" },
-    serviceType: "Drone light show entertainment",
+    category: "Event entertainment",
   };
 
   return (
@@ -165,24 +179,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
 
-        {/* JSON-LD (safe + stable) */}
+        {/* ✅ JSON-LD (render early so crawlers get it ASAP) */}
         <Script
           id="ld-org"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <Script
           id="ld-website"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Script
           id="ld-service"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        />
+
+        {/* ✅ Microsoft Clarity */}
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${CLARITY_ID}");
+            `,
+          }}
         />
 
         <HeaderPatriot />
