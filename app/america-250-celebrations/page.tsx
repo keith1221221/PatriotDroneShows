@@ -93,7 +93,7 @@ export default function America250CelebrationsPage() {
           <div className="max-w-5xl mx-auto flex justify-center pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
               <Link
-                href="/request-a-quote"
+                href="/contact"
                 className="
                   inline-flex justify-center items-center
                   bg-gradient-to-r from-red-500 via-white to-blue-500

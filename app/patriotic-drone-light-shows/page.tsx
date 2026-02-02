@@ -54,12 +54,14 @@ export default function PatrioticDroneShowsPage() {
         <div className="relative w-full">
           {/* HERO VIDEO (NOW ON MOBILE TOO) */}
           <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/flag_400.webp"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="none"
+  poster="/flag_400.webp"
+
+
             className="
               w-full
               h-[72vh] sm:h-[85vh]
