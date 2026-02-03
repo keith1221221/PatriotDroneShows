@@ -158,7 +158,7 @@ export default function PatrioticDroneLightShowsPage() {
 >
 
                   <source
-                    src="/PatriotDroneShows/pat_sizzle.mp4"
+                    src="/PatriotDroneShows/Pat_sizzle.mp4"
                     type="video/mp4"
                   />
                 </video>
