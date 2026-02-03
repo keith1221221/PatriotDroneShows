@@ -1,269 +1,288 @@
-import Link from "next/link";
-import Image from "next/image";
-import Script from "next/script";
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Patriotic Drone Light Shows Nationwide | Patriot Drone Shows",
+  title: "Patriotic Drone Light Shows | Nationwide July 4th & City Celebrations",
   description:
-    "Patriot Drone Shows provides large-scale patriotic drone light shows nationwide for July 4th, America 250, Veterans Day, Memorial Day, and city celebrations — a modern alternative to fireworks.",
+    "Premium patriotic drone light shows nationwide. Quiet, smokeless, and unforgettable — perfect for July 4th, Veterans Day, Memorial Day, and city celebrations. 150–400+ drones.",
   alternates: {
-    canonical: "https://www.patriotdroneshows.com/patriotic-drone-shows",
+    canonical: "https://www.patriotdroneshows.com/patriotic-drone-light-shows",
   },
 };
 
-export default function PatrioticDroneShowsPage() {
+type Feature = {
+  title: string;
+  description: string;
+  img: string;
+};
+
+type Tier = {
+  drones: string;
+  label: string;
+  headline: string;
+  body: string;
+  bestFor: string[];
+  poster: string;
+  video: string;
+};
+
+const FEATURES: Feature[] = [
+  {
+    title: "Iconic Patriot Moments",
+    description:
+      "Flags, eagles, 1776, and custom city tributes designed to read clearly to the crowd.",
+    img: "/shows/feat-1.webp",
+  },
+  {
+    title: "Text + Logos That Read",
+    description:
+      "Clean typography in the sky — names, city branding, sponsor messages, and countdown moments.",
+    img: "/shows/feat-2.webp",
+  },
+  {
+    title: "Fireworks-Style Finale",
+    description:
+      "Big energy without the smoke — dynamic bursts, rings, and high-impact transitions.",
+    img: "/shows/feat-3.webp",
+  },
+];
+
+const TIERS: Tier[] = [
+  {
+    drones: "150",
+    label: "Precision Tier",
+    headline: "Crisp, clean, and high-value",
+    body:
+      "Perfect for smaller venues and close viewing distances. Great for readable symbols, clean shapes, and short custom text moments.",
+    bestFor: [
+      "Smaller cities",
+      "Corporate events",
+      "Private celebrations",
+      "Tighter venue footprints",
+    ],
+    poster: "/shows/tier-150.webp",
+    video: "/shows/tier-150.mp4",
+  },
+  {
+    drones: "200",
+    label: "Most Popular",
+    headline: "Balanced density + motion",
+    body:
+      "A noticeable upgrade in fill and movement. Supports layered designs, smoother transitions, and bigger crowd impact.",
+    bestFor: [
+      "Mid-size city events",
+      "Festivals",
+      "Veterans/Memorial ceremonies",
+      "Community celebrations",
+    ],
+    poster: "/shows/tier-200.webp",
+    video: "/shows/tier-200.mp4",
+  },
+  {
+    drones: "400",
+    label: "Headline Tier",
+    headline: "Big, iconic, and unforgettable",
+    body:
+      "When you want the sky to feel full. Massive formations, sweeping motion, and signature moments that can replace or complement fireworks.",
+    bestFor: [
+      "July 4th headliners",
+      "Major city celebrations",
+      "Destination events",
+      "Large finales",
+    ],
+    poster: "/shows/tier-400.webp",
+    video: "/shows/tier-400.mp4",
+  },
+];
+
+export default function PatrioticDroneLightShowsPage() {
   return (
     <main className="bg-black text-white">
-      {/* Lazy-load Vimeo src only when section is near viewport (including mobile) */}
-      <Script id="lazy-vimeo-bg" strategy="afterInteractive">
-        {`
-          (function () {
-            var iframe = document.getElementById("vimeo-bg");
-            if (!iframe) return;
 
-            var dataSrc = iframe.getAttribute("data-src");
-            if (!dataSrc) return;
-
-            function load() {
-              if (iframe.getAttribute("src")) return;
-              iframe.setAttribute("src", dataSrc);
-            }
-
-            // Fallback if IO not supported
-            if (!("IntersectionObserver" in window)) {
-              setTimeout(load, 1200);
-              return;
-            }
-
-            var io = new IntersectionObserver(function(entries) {
-              if (!entries || !entries.length) return;
-              if (entries[0].isIntersecting) {
-                load();
-                io.disconnect();
-              }
-            }, { rootMargin: "300px" });
-
-            io.observe(iframe);
-          })();
-        `}
-      </Script>
-
-      {/* ================= HERO (SERVICE PAGE, SAME SPACING AS HOME) ================= */}
-      <section className="w-full pt-2 sm:pt-24">
-        <div className="relative w-full">
-          {/* HERO VIDEO (NOW ON MOBILE TOO) */}
-          <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="none"
-  poster="/flag_400.webp"
-
-
-            className="
-              w-full
-              h-[72vh] sm:h-[85vh]
-              object-contain sm:object-cover
-              bg-black
-              brightness-125 contrast-110 saturate-110
-            "
-          >
-            <source src="/flag_hero_720.mp4" type="video/mp4" />
-          </video>
-
-          {/* Overlay */}
-          <div className="absolute inset-0 px-4 sm:px-6 flex flex-col">
-            {/* TOP */}
-            <div className="pt-4 sm:pt-8 text-center">
-              <h1
-                className="
-                  font-orbitron font-bold
-                  text-3xl sm:text-5xl lg:text-6xl
-                  leading-tight
-                  drop-shadow-[0_0_14px_rgba(0,0,0,0.85)]
-                  px-3
-                "
-              >
-                Patriotic Drone Light Shows
-              </h1>
-
-              <p
-                className="
-                  mt-3 sm:mt-4
-                  max-w-3xl mx-auto
-                  text-base sm:text-xl md:text-2xl
-                  text-gray-100
-                  leading-relaxed
-                  drop-shadow-[0_0_14px_rgba(0,0,0,0.85)]
-                  px-3
-                "
-              >
-                Nationwide drone light shows designed for America 250, Christmas,
-                Holidays, Memorial Day, and city celebrations.
-              </p>
-            </div>
-
-            <div className="flex-1" />
-
-            {/* BOTTOM */}
-            <div className="pb-24 sm:pb-6 text-center">
-              <h2
-                className="
-                  font-orbitron
-                  text-lg sm:text-2xl md:text-3xl
-                  font-bold
-                  text-white
-                  drop-shadow-[0_0_14px_rgba(0,0,0,0.9)]
-                  px-2
-                "
-              >
-                Patriotic Drone Shows That Replace Fireworks — Without the Fallout
-              </h2>
-            </div>
-          </div>
-        </div>
-
-        {/* ================= BUTTONS ================= */}
-        <div className="px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto flex justify-center pt-0 sm:pt-2 pb-10 sm:pb-12">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
-              <Link
-                href="/request-a-quote"
-                className="
-                  inline-flex justify-center items-center
-                  bg-gradient-to-r from-red-500 via-white to-blue-500
-                  text-black font-bold py-4 px-7 rounded-full
-                  shadow-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
-                  transform hover:scale-105 transition
-                  font-orbitron
-                "
-              >
-                Request a Quote
-              </Link>
-
-              <Link
-                href="/locations"
-                className="
-                  inline-flex justify-center items-center
-                  border border-white/30 text-white
-                  font-bold py-4 px-7 rounded-full
-                  hover:border-white hover:bg-white/10
-                  transform hover:scale-[1.02] transition
-                  font-orbitron
-                "
-              >
-                View Nationwide Locations
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= INTRO ================= */}
-      <section className="py-16 px-4 sm:px-6">
+      {/* ================= TOP INTRO (NO HERO IMAGE) ================= */}
+      <section className="pt-12 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-gray-300 text-lg leading-relaxed">
-            Patriot Drone Shows specializes in{" "}
-            <span className="text-white font-semibold">
-              large-scale patriotic drone light shows
-            </span>{" "}
-            for national holidays, municipal celebrations, and civic events. Our
-            shows are quiet, eco-friendly, and fully customizable — delivering a
-            modern alternative to fireworks.
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/60 px-4 py-2 text-xs sm:text-sm text-gray-100">
+            <span className="inline-block h-2 w-2 rounded-full bg-red-500" />
+            Best-of Patriot Show Reel • Nationwide • FAA-compliant
+          </div>
+
+          <h1 className="mt-6 font-orbitron font-bold text-4xl sm:text-5xl md:text-6xl leading-tight">
+            Patriotic Drone Light Shows
+          </h1>
+
+          <p className="mt-6 text-gray-300 text-base sm:text-lg md:text-xl leading-relaxed">
+            Quiet. Smokeless. Unforgettable. We create iconic patriotic moments for
+            July 4th, Veterans Day, Memorial Day, city celebrations, and festivals —
+            anywhere in the U.S.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-full font-orbitron font-bold
+                bg-gradient-to-r from-red-500 via-white to-blue-500 text-black
+                shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.35)] transition"
+            >
+              Get a Quote
+            </Link>
+
+            <Link
+              href="#drone-counts"
+              className="inline-flex items-center justify-center px-10 py-4 rounded-full border border-white/25
+                text-white font-orbitron font-bold hover:bg-white/10 transition"
+            >
+              See Drone Count Options
+            </Link>
+          </div>
+
+          <p className="mt-5 text-xs sm:text-sm text-gray-400">
+            Fast response • We’ll recommend the right drone count and pricing range for your venue and crowd.
           </p>
         </div>
       </section>
 
-      {/* ================= FIREWORKS ALTERNATIVE ================= */}
-      <section className="relative w-full h-[70vh] sm:h-[75vh] overflow-hidden bg-black">
-        <div className="absolute inset-0 overflow-hidden bg-black">
-          {/* Lightweight paint immediately (helps perceived speed) */}
-          <Image
-            src="/fireworks_comp.webp"
-            alt="Patriotic backdrop"
-            width={1200}
-            height={800}
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover opacity-100"
-          />
+      {/* ================= FEATURED REEL ================= */}
+      <section className="px-4 sm:px-6 pb-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-white/10 bg-gray-900/30 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-5">
+              <div className="lg:col-span-3">
+              <video
+  className="w-full aspect-video object-contain bg-black"
+  controls
+  playsInline
+  preload="metadata"
+  poster="/PatriotDroneShows/patriot_poster.webp"
+>
 
-          {/* Vimeo loads ONLY when near viewport (mobile included) */}
-          <iframe
-            id="vimeo-bg"
-            data-src="https://player.vimeo.com/video/1147748380?autoplay=1&muted=1&loop=1&background=1&playsinline=1"
-            src="" /* intentionally blank until script sets it */
-            title="Fireworks Alternative Drone Show"
-            allow="autoplay; fullscreen; picture-in-picture"
-            loading="lazy"
-            className="
-              absolute left-1/2 top-1/2
-              w-[177.78vh] h-[56.25vw]
-              min-w-full min-h-full
-              -translate-x-1/2 -translate-y-1/2
-              pointer-events-none
-              opacity-100
-            "
-          />
-        </div>
+                  <source
+                    src="/PatriotDroneShows/pat_sizzle.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
 
-        <div className="absolute inset-0 bg-black/5" />
+              <div className="lg:col-span-2 p-6 sm:p-8">
+                <h2 className="font-orbitron font-bold text-xl sm:text-2xl">
+                  Watch our best patriotic moments
+                </h2>
+                <p className="mt-3 text-gray-300 leading-relaxed">
+                  This reel showcases the type of iconic formations we design:
+                  readable text, bold symbols, fireworks-style effects, and
+                  crowd-ready pacing.
+                </p>
 
-        <div className="relative z-10 h-full flex items-end px-4 pb-10 sm:pb-16">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-orbitron text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
-              A Powerful Alternative to Fireworks
-            </h2>
+                <div className="mt-6 grid gap-3">
+                  <MiniPill text="Quiet & smokeless" />
+                  <MiniPill text="Custom designs + city tributes" />
+                  <MiniPill text="Ideal for July 4th & municipal events" />
+                </div>
 
-            <p className="text-lg sm:text-xl text-gray-100 leading-relaxed drop-shadow-[0_0_18px_rgba(0,0,0,0.9)]">
-              Create fireworks-style excitement with hundreds of synchronized
-              drones — without fire risk, loud explosions, or environmental impact.
-            </p>
+                <div className="mt-7">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center w-full px-8 py-4 rounded-full font-orbitron font-bold
+                      bg-white text-black hover:bg-gray-100 transition shadow-lg"
+                  >
+                    Request Availability
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* FEATURE TILES */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {FEATURES.map((f) => (
+              <div
+                key={f.title}
+                className="rounded-3xl border border-white/10 bg-gray-900/20 overflow-hidden"
+              >
+                <div className="relative aspect-video">
+                  <Image
+                    src={f.img}
+                    alt={f.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="font-orbitron font-bold text-sm sm:text-base">
+                      {f.title}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-200 mt-1">
+                      {f.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ================= USE CASES ================= */}
-      <section className="py-20 px-4 sm:px-6">
-        <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-center mb-14">
-          Perfect For
-        </h2>
+      {/* ================= DRONE COUNTS ================= */}
+      <section id="drone-counts" className="px-4 sm:px-6 pb-20">
+        <div className="max-w-6xl mx-auto text-center mb-10">
+          <h2 className="font-orbitron font-bold text-2xl sm:text-4xl">
+            Choose the right drone count for your event
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <UseCase title="America 250 Celebrations">
-            Flags, stars, historic storytelling, and large-scale patriotic finales.
-          </UseCase>
-
-          <UseCase title="July 4th Events">
-            Crowd-pleasing drone shows designed to replace fireworks safely.
-          </UseCase>
-
-          <UseCase title="Veterans & Memorial Day">
-            Meaningful aerial tributes honoring service and sacrifice.
-          </UseCase>
-
-          <UseCase title="City & Municipal Events">
-            Permitted, insured shows for large public gatherings nationwide.
-          </UseCase>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {TIERS.map((tier) => (
+            <TierCard key={tier.drones} tier={tier} />
+          ))}
         </div>
       </section>
+
     </main>
   );
 }
 
-/* ================= USE CASE CARD ================= */
-function UseCase({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+/* ================= COMPONENTS ================= */
+
+function MiniPill({ text }: { text: string }) {
   return (
-    <div className="text-center p-8 bg-gray-900 rounded-3xl border border-gray-800 shadow-lg">
-      <h3 className="font-orbitron text-xl font-bold mb-3">{title}</h3>
-      <p className="text-gray-300">{children}</p>
+    <div className="rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-gray-200">
+      {text}
+    </div>
+  );
+}
+
+function TierCard({ tier }: { tier: Tier }) {
+  return (
+    <div className="rounded-3xl border border-white/10 bg-gray-900/25 overflow-hidden">
+      <video
+        className="w-full aspect-video object-cover bg-black"
+        controls
+        playsInline
+        preload="metadata"
+        poster="/PatriotDroneShows/"
+      >
+        <source src={tier.video} type="video/mp4" />
+      </video>
+
+      <div className="p-6">
+        <h3 className="font-orbitron font-bold text-lg">{tier.headline}</h3>
+        <p className="mt-3 text-gray-300 text-sm leading-relaxed">{tier.body}</p>
+
+        <ul className="mt-4 space-y-1 text-sm text-gray-200">
+          {tier.bestFor.map((item) => (
+            <li key={item}>• {item}</li>
+          ))}
+        </ul>
+
+        <Link
+          href="/contact"
+          className="mt-6 inline-flex w-full items-center justify-center px-6 py-3 rounded-full font-orbitron font-bold
+            bg-gradient-to-r from-red-500 via-white to-blue-500 text-black transition"
+        >
+          Get a Quote
+        </Link>
+      </div>
     </div>
   );
 }
