@@ -23,8 +23,9 @@ type Tier = {
   headline: string;
   body: string;
   bestFor: string[];
-  poster: string;
-  video: string;
+  poster?: string;
+  video?: string;
+  vimeoId?: string;
 };
 
 const FEATURES: Feature[] = [
@@ -32,19 +33,19 @@ const FEATURES: Feature[] = [
     title: "Iconic Patriot Moments",
     description:
       "Flags, eagles, 1776, and custom city tributes designed to read clearly to the crowd.",
-    img: "/shows/feat-1.webp",
+    img: "/PatriotDroneShows/eagle3.webp",
   },
   {
     title: "Text + Logos That Read",
     description:
       "Clean typography in the sky — names, city branding, sponsor messages, and countdown moments.",
-    img: "/shows/feat-2.webp",
+    img: "/PatriotDroneShows/welcome.webp",
   },
   {
     title: "Fireworks-Style Finale",
     description:
       "Big energy without the smoke — dynamic bursts, rings, and high-impact transitions.",
-    img: "/shows/feat-3.webp",
+    img: "/PatriotDroneShows/fireworks.webp",
   },
 ];
 
@@ -61,9 +62,9 @@ const TIERS: Tier[] = [
       "Private celebrations",
       "Tighter venue footprints",
     ],
-    poster: "/shows/tier-150.webp",
-    video: "/shows/tier-150.mp4",
+    vimeoId: "1147884804",
   },
+
   {
     drones: "200",
     label: "Most Popular",
@@ -76,9 +77,9 @@ const TIERS: Tier[] = [
       "Veterans/Memorial ceremonies",
       "Community celebrations",
     ],
-    poster: "/shows/tier-200.webp",
-    video: "/shows/tier-200.mp4",
+    vimeoId: "1161653102",
   },
+
   {
     drones: "400",
     label: "Headline Tier",
@@ -91,6 +92,8 @@ const TIERS: Tier[] = [
       "Destination events",
       "Large finales",
     ],
+    // TODO: paste your 400-drone Vimeo link and I’ll set the ID
+    // vimeoId: "xxxxxxxxxx",
     poster: "/shows/tier-400.webp",
     video: "/shows/tier-400.mp4",
   },
@@ -99,7 +102,6 @@ const TIERS: Tier[] = [
 export default function PatrioticDroneLightShowsPage() {
   return (
     <main className="bg-black text-white">
-
       {/* ================= TOP INTRO (NO HERO IMAGE) ================= */}
       <section className="pt-12 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -138,7 +140,8 @@ export default function PatrioticDroneLightShowsPage() {
           </div>
 
           <p className="mt-5 text-xs sm:text-sm text-gray-400">
-            Fast response • We’ll recommend the right drone count and pricing range for your venue and crowd.
+            Fast response • We’ll recommend the right drone count and pricing range
+            for your venue and crowd.
           </p>
         </div>
       </section>
@@ -149,14 +152,13 @@ export default function PatrioticDroneLightShowsPage() {
           <div className="rounded-3xl border border-white/10 bg-gray-900/30 overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-5">
               <div className="lg:col-span-3">
-              <video
-  className="w-full aspect-video object-contain bg-black"
-  controls
-  playsInline
-  preload="metadata"
-  poster="/PatriotDroneShows/patriot_poster.webp"
->
-
+                <video
+                  className="w-full aspect-video object-contain bg-black"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/PatriotDroneShows/patriot_poster.webp"
+                >
                   <source
                     src="/PatriotDroneShows/Pat_sizzle.mp4"
                     type="video/mp4"
@@ -200,13 +202,8 @@ export default function PatrioticDroneLightShowsPage() {
                 key={f.title}
                 className="rounded-3xl border border-white/10 bg-gray-900/20 overflow-hidden"
               >
-                <div className="relative aspect-video">
-                  <Image
-                    src={f.img}
-                    alt={f.title}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative aspect-[16/10] sm:aspect-[16/9]">
+                  <Image src={f.img} alt={f.title} fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="font-orbitron font-bold text-sm sm:text-base">
@@ -237,7 +234,6 @@ export default function PatrioticDroneLightShowsPage() {
           ))}
         </div>
       </section>
-
     </main>
   );
 }
@@ -255,15 +251,28 @@ function MiniPill({ text }: { text: string }) {
 function TierCard({ tier }: { tier: Tier }) {
   return (
     <div className="rounded-3xl border border-white/10 bg-gray-900/25 overflow-hidden">
-      <video
-        className="w-full aspect-video object-cover bg-black"
-        controls
-        playsInline
-        preload="metadata"
-        poster="/PatriotDroneShows/"
-      >
-        <source src={tier.video} type="video/mp4" />
-      </video>
+      {/* MEDIA: Vimeo if available, else local mp4 */}
+      {tier.vimeoId ? (
+        <div className="relative w-full aspect-video bg-black">
+          <iframe
+            src={`https://player.vimeo.com/video/${tier.vimeoId}?title=0&byline=0&portrait=0`}
+            className="absolute inset-0 w-full h-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        </div>
+      ) : (
+        <video
+          className="w-full aspect-video object-cover bg-black"
+          controls
+          playsInline
+          preload="metadata"
+          poster={tier.poster}
+        >
+          <source src={tier.video} type="video/mp4" />
+        </video>
+      )}
 
       <div className="p-6">
         <h3 className="font-orbitron font-bold text-lg">{tier.headline}</h3>

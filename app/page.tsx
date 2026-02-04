@@ -187,9 +187,7 @@ export default function PatrioticDroneShowsPage() {
       <section className="px-4 sm:px-6 pb-10">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-3xl border border-gray-800 bg-gray-900/30 p-6 sm:p-8">
-            <h2 className="font-orbitron text-2xl sm:text-3xl font-bold text-center">
-              Start Here
-            </h2>
+            
             <p className="mt-3 text-gray-300 text-center max-w-3xl mx-auto">
               Jump to the page that matches your event type and planning stage.
             </p>
