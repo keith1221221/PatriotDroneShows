@@ -53,7 +53,7 @@ const TIERS: Tier[] = [
   {
     drones: "150",
     label: "Precision Tier",
-    headline: "Crisp, clean, and high-value",
+    headline: "150 Drones - Crisp, clean, and high-value",
     body:
       "Perfect for smaller venues and close viewing distances. Great for readable symbols, clean shapes, and short custom text moments.",
     bestFor: [
@@ -68,7 +68,7 @@ const TIERS: Tier[] = [
   {
     drones: "200",
     label: "Most Popular",
-    headline: "Balanced density + motion",
+    headline: "200 Drones - Balanced density + motion",
     body:
       "A noticeable upgrade in fill and movement. Supports layered designs, smoother transitions, and bigger crowd impact.",
     bestFor: [
@@ -83,7 +83,7 @@ const TIERS: Tier[] = [
   {
     drones: "400",
     label: "Headline Tier",
-    headline: "Big, iconic, and unforgettable",
+    headline: "400 Drones - Big, iconic, and unforgettable",
     body:
       "When you want the sky to feel full. Massive formations, sweeping motion, and signature moments that can replace or complement fireworks.",
     bestFor: [
@@ -93,7 +93,7 @@ const TIERS: Tier[] = [
       "Large finales",
     ],
     // TODO: paste your 400-drone Vimeo link and I’ll set the ID
-    // vimeoId: "xxxxxxxxxx",
+    vimeoId: "1148138573",
     poster: "/shows/tier-400.webp",
     video: "/shows/tier-400.mp4",
   },
