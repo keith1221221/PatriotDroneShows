@@ -149,7 +149,7 @@ export default function UtahDroneLightShowsPage() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/request-a-quote"
+            href="/contact"
             className="inline-flex items-center justify-center px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition font-orbitron"
           >
             Request a Quote
